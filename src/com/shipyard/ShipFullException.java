@@ -7,4 +7,11 @@ package com.shipyard;
 
 public class ShipFullException extends Exception {
 
+    String message = "This ship is already full.";
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
 }

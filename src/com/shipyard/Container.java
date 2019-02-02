@@ -4,22 +4,47 @@ package com.shipyard;
  * A normal basic container that is used for most shipping.
  */
 
-public class Container {
+public abstract class Container {
 
     private boolean explosives;
-    private boolean toxics;
+    private boolean toxic;
 
-    public Container(boolean explosives, boolean toxics) {
-        this.explosives = explosives;
-        this.toxics = toxics;
+
+    public Container() {
     }
 
     public boolean getExplosives() {
         return this.explosives;
     }
 
-    public boolean getToxics() {
-        return this.toxics;
+    public boolean getToxic() {
+        return this.toxic;
     }
-    
+
+    @Override
+    public String toString() {
+        String data = "";
+        if (this instanceof HeavyContainer){
+            data = "Heavy ";
+            if (this.getToxic()){
+                data += "toxic ";
+            }
+            if (this.getExplosives()){
+                data += "explosive ";
+            }
+            data += "container";
+            return data;
+        }
+        else if (this instanceof RefrigeratedContainer){
+            data = "Refrigerated ";
+            if (this.getToxic()){
+                data += "toxic ";
+            }
+            if (this.getExplosives()){
+                data += "explosive ";
+            }
+            data += "container";
+        }
+        return data;
+    }
 }

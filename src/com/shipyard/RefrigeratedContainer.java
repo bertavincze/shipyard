@@ -7,18 +7,19 @@ package com.shipyard;
 public class RefrigeratedContainer extends Container {
 
     private boolean explosives;
-    private boolean toxics;
+    private boolean toxic;
 
-    public RefrigeratedContainer(boolean explosives, boolean toxics) {
-        super(explosives, toxics);
+    public RefrigeratedContainer(boolean explosives, boolean toxic) {
+        this.explosives = explosives;
+        this.toxic = toxic;
     }
 
     public boolean getExplosives() {
         return this.explosives;
     }
 
-    public boolean getToxics() {
-        return this.toxics;
+    public boolean getToxic() {
+        return this.toxic;
     }
 
 }

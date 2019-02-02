@@ -1,43 +1,59 @@
 package com.shipyard;
 
-import java.util.Arrays;
+import java.util.Iterator;
 
 public class Main {
 
     public static void main(String[] args) {
-            System.out.println("TESTING");
-            System.out.println();
-            
-            Docks docks = new Docks("Test Bay", 1);
-            System.out.println(docks.getName());
-            System.out.println();
-            for (Ship ship : docks.getShips()) {
-                System.out.println(ship.toString());
+        System.out.println("TESTING");
+        System.out.println();
+
+        Docks docks = new Docks("Test Bay", 5, 100, 100);
+        System.out.println("Currently docking at: " + docks.getName());
+        System.out.println("Number of ships: " + docks.getSize());
+        System.out.println("Number of containers awaiting pickup: " + docks.getContainers().size());
+
+        System.out.println();
+        System.out.println("Container list:\n");
+        for (Container container: docks.getContainers()) {
+            System.out.println(container.toString());
+        }
+
+        System.out.println();
+        System.out.println("Ship list:\n");
+        for (int i = 0; i < docks.getShips().length; i++) {
+            System.out.println(docks.getShips()[i].toString());
+
+        }
+        Ship ship = docks.getShips()[0];
+
+        Iterator<Container> iterator = docks.getContainerIterator();
+        for (Container container : docks.getContainers()) {
+            try {
+                ship.loadCargo(container, docks.getContainers());
+                System.out.println("Successfully loaded " + container.toString() + " onto " + ship.getName() + ".");
+
+            } catch (HeavyContentException hce) {
+                System.out.println(hce.getMessage());
+                System.out.println("Moving on...");
+                continue;
+            } catch (RefrigeratedContentException rce) {
+                System.out.println(rce.getMessage());
+                System.out.println("Moving on...");
+                continue;
+            } catch (WrongTypeException wte){
+                System.out.println(container.toString() + ": " + wte.getMessage());
+                System.out.println("Moving on...");
+                continue;
+            } catch (ShipFullException sfe) {
+                System.out.println(sfe.getMessage());
+                break;
             }
-            
-            Container[] containers = new Container[2];
-            for (int i = 0; i < containers.length; i++) {
-                containers[i] = docks.generateContainers();
-            }
 
-            System.out.println(Arrays.toString(containers));
-            Ship ship = new Ship("Da Lulz", 50, 25, 5, true, true);
-            System.out.println(ship.toString());
+        }
+        System.out.println();
+        System.out.println(ship.getCurrentStatus());
 
-           
-            for (int i = 0; i < containers.length; i++) {
-                try {
-                    ship.loadCargo(containers[i]);  
-                } catch (ShipFullException e) {
-                    System.out.println("Ship is full!");
-                }
-            }
-
-            System.out.println(Arrays.toString(ship.heavyContents));
-
-            
-
-            
 
     }
 }

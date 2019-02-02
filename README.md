@@ -6,7 +6,7 @@ There will be several different kinds of containers but at first there will be t
     - A heavy container is a kind of basic container
     - A refrigerated container which is a kind of heavy container
     - Any container may have special properties for containing explosives
-    - Any container may have special properties for containing toxics
+    - Any container may have special properties for containing toxic material.
 
 Each ship has capacity that may be different. The capacity has the following parts: 
     - Maximum number of toxic and explosive containers (optional for a ship)
