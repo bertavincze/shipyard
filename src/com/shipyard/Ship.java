@@ -65,7 +65,7 @@ public class Ship {
         return this.toxic;
     }
 
-    public boolean isContainerAllowed(Container container) {
+    private boolean isContainerAllowed(Container container) {
         if (!container.getExplosives() && !container.getToxic()){
             return true;
         }
@@ -82,20 +82,6 @@ public class Ship {
             return true;
         }
         else if (container.getToxic() && this.getToxic() && !container.getExplosives() && this.getExplosives()){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isExplosiveAllowed(Container container) {
-        if (container.getExplosives() && getExplosives()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isToxicAllowed(Container container) {
-        if (container.getToxic() && getToxic()) {
             return true;
         }
         return false;
