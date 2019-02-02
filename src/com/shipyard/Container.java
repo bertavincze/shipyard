@@ -6,18 +6,12 @@ package com.shipyard;
 
 public class Container {
 
-    private Container[] contents;
     private boolean explosives;
     private boolean toxics;
 
-    public Container(Container[] contents, boolean explosives, boolean toxics) {
-        this.contents = contents;
+    public Container(boolean explosives, boolean toxics) {
         this.explosives = explosives;
         this.toxics = toxics;
-    }
-
-    public Container[] getContents() {
-        return this.contents;
     }
 
     public boolean getExplosives() {
@@ -27,4 +21,5 @@ public class Container {
     public boolean getToxics() {
         return this.toxics;
     }
+    
 }

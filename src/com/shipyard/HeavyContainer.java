@@ -6,16 +6,11 @@ package com.shipyard;
 
 public class HeavyContainer extends Container {
 
-    private Container[] contents;
     private boolean explosives;
     private boolean toxics;
 
-    public HeavyContainer(Container[] contents, boolean explosives, boolean toxics) {
-        super(contents, explosives, toxics);
-    }
-
-    public Container[] getContents() {
-        return this.contents;
+    public HeavyContainer(boolean explosives, boolean toxics) {
+        super(explosives, toxics);
     }
 
     public boolean getExplosives() {

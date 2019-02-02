@@ -4,19 +4,13 @@ package com.shipyard;
  * A refrigerated container which is a kind of heavy container.
  */
 
-public class RefrigeratedContainer extends HeavyContainer {
+public class RefrigeratedContainer extends Container {
 
-    private Container[] contents;
     private boolean explosives;
     private boolean toxics;
 
-    public RefrigeratedContainer(Container[] contents, boolean explosives, boolean toxics) {
-        super(contents, explosives, toxics);
-        
-    }
-
-    public Container[] getContents() {
-        return this.contents;
+    public RefrigeratedContainer(boolean explosives, boolean toxics) {
+        super(explosives, toxics);
     }
 
     public boolean getExplosives() {
@@ -26,4 +20,5 @@ public class RefrigeratedContainer extends HeavyContainer {
     public boolean getToxics() {
         return this.toxics;
     }
+
 }

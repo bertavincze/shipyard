@@ -1,5 +1,7 @@
 package com.shipyard;
 
+import java.util.Random;
+
 public class Docks {
 
     private String name;
@@ -30,6 +32,12 @@ public class Docks {
     
     public Ship[] getShips() {
         return this.ships;
+    }
+
+    public Container generateContainers() {
+        Random random = new Random();
+        Container container = new Container(random.nextBoolean(), random.nextBoolean());
+        return container;
     }
 
 }

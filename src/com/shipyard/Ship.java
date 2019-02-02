@@ -1,5 +1,7 @@
 package com.shipyard;
 
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -14,15 +16,29 @@ public class Ship {
 
     private String name;
     private int allContainers;
-    private Container[][] cargo;
+    private Map<String, Container[]> cargo;
     private int heavyContainers;
     private int refrigeratedContainers;
+    Container[] heavyContents;
+    Container[] refContents;
     private boolean explosives;
     private int explosiveContainers;
     private boolean toxics;
     private int toxicContainers;
     private Random random = new Random();
 
+    public Ship(String name, int allContainers, int heavyContainers, int refrigeratedContainers,
+                boolean explosives, boolean toxics) {
+        this.name = name;
+        this.allContainers = allContainers;
+        this.heavyContainers = heavyContainers;
+        this.refrigeratedContainers = refrigeratedContainers;
+        this.explosives = explosives;
+        this.toxics = toxics;
+        this.heavyContents = new HeavyContainer[heavyContainers];
+        this.refContents = new RefrigeratedContainer[refrigeratedContainers];
+    }
+    
     public Ship() {
         this.name = nameShip();
         this.allContainers = random.nextInt(301) + 100;
@@ -30,6 +46,8 @@ public class Ship {
         this.refrigeratedContainers = allContainers - heavyContainers;
         this.explosives = setExplosives();
         this.toxics = setToxics();
+        this.heavyContents = new HeavyContainer[heavyContainers];
+        this.refContents = new RefrigeratedContainer[refrigeratedContainers];
     }
 
     private String nameShip() {
@@ -51,7 +69,7 @@ public class Ship {
         return this.name;
     }
 
-    public Container[][] getCargo() {
+    public Map<String, Container[]> getCargo() {
         return this.cargo;
     }
 
@@ -91,12 +109,44 @@ public class Ship {
         return this.explosives;
     }
 
+    public void loadCargo(Container container) throws ShipFullException {
+        while (Arrays.asList(this.heavyContents).contains(null)) {
+            if (container instanceof HeavyContainer) {
+                int j = 0;
+                for (int i = 0; i < this.heavyContents.length; i++) {
+                    if (this.heavyContents[i] == null) {
+                        this.heavyContents[j] = container;
+                    }
+                    else {
+                        j++;
+                    }
+                }
+                
+            }
+            else if (container instanceof RefrigeratedContainer) {
+                int j = 0;
+                for (int i = 0; i < this.refContents.length; i++) {
+                    if (this.refContents[i] == null) {
+                        this.refContents[j] = container;
+                    }
+                    else {
+                        j++;
+                    }
+                }
+            }
+        this.cargo = Map.of("Heavy Containers", heavyContents, "Refrigerated Containers", refContents);
+        }
+        if (!Arrays.asList(this.heavyContents).contains(null)) {
+            throw new ShipFullException();
+        }
+    }
+
     public String getCurrentStatus() {
         String currentStatus = "";
-        currentStatus += "Name: " + this.getName() + "\n"
-        + "Current load: " + this.getCargo().length + " containers\n";
+        currentStatus += "Name: " + this.getName() + "\n";
         return currentStatus;
     }
+
     @Override
     public String toString() {
         String shipInfo = "";
