@@ -25,10 +25,10 @@ public class FileHandler {
             return data;
 
         } catch (FileNotFoundException f) {
-            System.out.println("File not found!");
+            System.out.println(f.getMessage());
             return null;
         } catch (IOException e) {
-            System.out.println("IO Exception occured!");
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -48,10 +48,10 @@ public class FileHandler {
             return null;
 
         } catch (FileNotFoundException f) {
-            System.out.println("File not found!");
+            System.out.println(f.getMessage());
             return null;
         } catch (IOException e) {
-            System.out.println("IO Exception occured!");
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -68,7 +68,7 @@ public class FileHandler {
             bw.append("\n");
 
         } catch (IOException e) {
-            System.out.println("IO Exception occured!");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -81,7 +81,7 @@ public class FileHandler {
             }
 
         } catch (IOException e) {
-            System.out.println("IO Exception occured!");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -95,10 +95,10 @@ public class FileHandler {
             return i;
 
         } catch (FileNotFoundException f) {
-            System.out.println("File not found!");
+            System.out.println(f.getMessage());
             return 0;
         } catch (IOException e) {
-            System.out.println("IO Exception occured!");
+            System.out.println(e.getMessage());
             return 0;
         }
     }
@@ -111,10 +111,10 @@ public class FileHandler {
             return i;
             
         } catch (FileNotFoundException f) {
-            System.out.println("File not found!");
+            System.out.println(f.getMessage());
             return 0;
         } catch (IOException e) {
-            System.out.println("IO Exception occured!");
+            System.out.println(e.getMessage());
             return 0;
         }
     }

@@ -85,6 +85,7 @@ public class Ship {
             return true;
         }
         return false;
+
     }
 
     private boolean isShipFull() {
@@ -152,7 +153,7 @@ public class Ship {
         return this.explosives;
     }
 
-    public void loadCargo(Container container, List<Container> containers) throws ShipFullException, WrongTypeException {
+    public void loadCargo(Container container) throws ShipFullException, WrongTypeException {
         if (!isShipFull()) {
             if (container instanceof HeavyContainer) {
                 if (isContainerAllowed(container) && !isHeavyContentsFull()){
@@ -171,9 +172,10 @@ public class Ship {
                 } else if (isRefContentsFull()) {
                     throw new RefrigeratedContentException();
                 }
-                } else if (!isContainerAllowed(container)) {
+                 else if (!isContainerAllowed(container)) {
                     throw new WrongTypeException();
                 }
+            }
         } else if (isShipFull()) {
             throw new ShipFullException();
         }
@@ -183,7 +185,7 @@ public class Ship {
         String currentStatus = "";
         int currentLoad = this.heavyContents.size() + this.refContents.size();
         currentStatus += "Name: " + this.getName() + "\n"
-                + "Current load out of total capacity: " + currentLoad + "/" + this.getAllContainers() + "\n"
+                + "Current load/total capacity: " + currentLoad + "/" + this.getAllContainers() + "\n"
                 + "Current cargo: " + this.getCargo() + "\n";
         return currentStatus;
     }

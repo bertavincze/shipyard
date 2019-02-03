@@ -1,50 +1,19 @@
 package com.shipyard;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-public class Docks {
+public class Docks implements Iterable<Container>{
 
     private String name;
     private int size;
     private Ship[] ships;
     private List<Container> containers;
-    private Iterator containerIterator;
 
     public Docks(String name, int size, int heavyContainers, int refrigeratedContainers) {
         this.name = name;
         this.size = size; 
         this.ships = createShips(size);
         this.containers = generateContainers(heavyContainers,refrigeratedContainers);
-    }
-
-    public Iterator getContainerIterator() {
-        return new Iterator<Container>() {
-            int index;
-
-            @Override
-            public boolean hasNext() {
-                while (index < containers.size()){
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public Container next() {
-                if (this.hasNext()) {
-                    return containers.get(index++);
-                }
-                return null;
-            }
-
-            @Override
-            public void remove() {
-                containers.remove(index);
-            }
-        };
     }
 
     public Ship[] createShips(int num) {
@@ -72,7 +41,7 @@ public class Docks {
     }
 
     public List<Container> generateContainers(int heavyContainers, int refrigeratedContainers) {
-        List<Container> containers = new ArrayList<>();
+        List<Container> containers = new LinkedList<>();
         Random random = new Random();
         for (int i = 0; i < heavyContainers; i++) {
             Container container = new HeavyContainer(random.nextBoolean(), random.nextBoolean());
@@ -85,4 +54,8 @@ public class Docks {
         return containers;
     }
 
+    @Override
+    public Iterator<Container> iterator() {
+        return containers.iterator();
+    }
 }
