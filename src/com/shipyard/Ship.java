@@ -1,5 +1,6 @@
 package com.shipyard;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -10,7 +11,7 @@ import java.util.*;
  * - Maximum number of all containers including basic containers
  */
 
-public class Ship {
+public class Ship implements Serializable {
 
     private String name;
     private int allContainers;
@@ -20,9 +21,7 @@ public class Ship {
     private List<Container> heavyContents;
     private List<Container> refContents;
     private boolean explosives;
-    private int explosiveContainers;
     private boolean toxic;
-    private int toxicContainers;
     private Random random = new Random();
 
     public Ship(String name, int allContainers, int heavyContainers, int refrigeratedContainers,
@@ -127,22 +126,6 @@ public class Ship {
 
     public int getRefrigeratedContainers() {
         return this.refrigeratedContainers;
-    }
-
-    public int getToxicContainers() {
-        if (this.toxic) {
-            return this.toxicContainers;
-        } else {
-            return 0;
-        }
-    }
-
-    public int getExplosiveContainers() {
-        if (this.explosives) {
-            return this.explosiveContainers;
-        } else {
-            return 0;
-        }
     }
 
     public boolean getToxic() {

@@ -1,10 +1,12 @@
 package com.shipyard;
 
+import java.io.Serializable;
+
 /**
  * A normal basic container that is used for most shipping.
  */
 
-public abstract class Container {
+public abstract class Container implements Serializable {
 
     private boolean explosives;
     private boolean toxic;

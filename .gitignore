@@ -1,0 +1,6 @@
+.idea
+target
+*.iml
+*.swp
+log.txt
+serialization.ser

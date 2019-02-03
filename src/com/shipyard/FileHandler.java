@@ -56,30 +56,21 @@ public class FileHandler {
         }
     }
 
-    public void append(String file, String[] items) {
+    public void append(String file, String text) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
-            for (String item : items) {
-                if (item != null && !item.equals(items[items.length-1])) {
-                    bw.append(item + ",");
-                } else {
-                    bw.append(item);
-                }
+            if (text != null) {
+                bw.append(text + "\n");
             }
-            bw.append("\n");
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void write(String file, String[] items) {
+    public void write(String file, String text) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            for (String item : items) {
-                if (item != null) {
-                    bw.append(item + "\n");
-                }
+            if (text != null) {
+                bw.append(text + "\n");
             }
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
